@@ -2,6 +2,7 @@ import express, { application } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
+import authRouter from './routes/auth.route.js';
 
 dotenv.config();
 
@@ -14,6 +15,9 @@ mongoose.connect(process.env.MONGO_CONN).then(() => {
 
 const app = express();
 
+// Allow JSON as input to the server otherwise it will get undefined
+app.use(express.json());
+
 const port = 3000;
 
 app.listen(port, () => {
@@ -22,3 +26,4 @@ app.listen(port, () => {
 
 // call at 3000/api/user
 app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
