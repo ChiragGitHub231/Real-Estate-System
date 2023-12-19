@@ -51,9 +51,9 @@ export default function Header() {
               Privacy
             </li>
           </Link>
-          <Link to='/sign-in'>
+          <Link to='/sign-up'>
             <li className="text-slate-700 hover:no-underline cursor-pointer">
-              Sign In
+              Sign Up
             </li>
           </Link>
         </ul>
