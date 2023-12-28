@@ -83,6 +83,11 @@ export default function SignUp() {
                       placeholder="Name"
                       id="username"
                       onChange={handleChange}
+                      required
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Username is Required")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
                 </div>
@@ -100,26 +105,11 @@ export default function SignUp() {
                       placeholder="Email"
                       id="email"
                       onChange={handleChange}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="password"
-                      className="text-base font-medium text-gray-900"
-                    >
-                      Password
-                    </label>
-                  </div>
-
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="password"
-                      placeholder="Password"
-                      id="password"
-                      onChange={handleChange}
+                      required
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Email is Required")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
                 </div>
@@ -138,26 +128,48 @@ export default function SignUp() {
                       placeholder="Mobile"
                       id="contactno"
                       onChange={handleChange}
+                      required
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Contact No is Required")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
                 </div>
+
                 <div>
-                  {/* <button
-                    disabled = {loading}
-                    type="button"
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="password"
+                      className="text-base font-medium text-gray-900"
+                    >
+                      Password
+                    </label>
+                  </div>
+
+                  <div className="mt-2">
+                    <input
+                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      type="password"
+                      placeholder="Password"
+                      id="password"
+                      onChange={handleChange}
+                      required
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Password is Required")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <button
+                    disabled={loading}
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                   >
                     {loading ? "Loading..." : "Sign Up"}
-               
-               
-                  </button> */}
-
-<button
-            disabled={loading}
-            className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-          >
-            {loading ? "Loading..." : "Sign Up"}
-          </button>
+                  </button>
                 </div>
               </div>
             </form>
@@ -185,85 +197,11 @@ export default function SignUp() {
         <div className="h-full w-full">
           <img
             className="mx-auto h-4/5 w-4/5 mt-10 pt-10  rounded-md object-cover"
-            src="https://media.istockphoto.com/id/1150278000/photo/modern-white-house-with-swimming-pool.jpg?s=612x612&w=0&k=20&c=5uBhkdER9uGSXKOt_AZjxOXAYjnhxj6b8JCW1UWv2WA="
+            src="./assets/res_login.jpg"
             alt=""
           />
         </div>
       </div>
-
-
-          
-
-
-
-
-
-       {/* <div className="p-5 max-w-lg mx-auto">
-        <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <input
-            type="text"
-            placeholder="Username"
-            className="border p-3 rounded-lg"
-            id="username"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Username is Required')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-
-          <input
-            type="text"
-            placeholder="Contact No"
-            className="border p-3 rounded-lg"
-            id="contactno"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Contact No is Required')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-
-          <input
-            type="email"
-            placeholder="Email"
-            className="border p-3 rounded-lg"
-            id="email"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Email is Required')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-  
-          <input
-            type="password"
-            placeholder="Password"
-            className="border p-3 rounded-lg"
-            id="password"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Password is Required')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-
-          <button
-            disabled={loading}
-            className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
-          >
-            {loading ? "Loading..." : "Sign Up"}
-          </button>
-        </form>
-
-        <div className="flex gap-2 mt-5">
-          <p>
-            Have an account?{" "}
-            <Link to={"/sign-in"}>
-              <span className="text-blue-700">Sign In</span>
-            </Link>
-          </p>
-        </div>
-        {error && <p className="text-red-500 mt-5">{error}</p>}
-      </div>  */}
     </>
   );
 }

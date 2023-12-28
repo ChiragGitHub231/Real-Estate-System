@@ -86,6 +86,9 @@ export default function SignIn() {
                       placeholder="Email"
                       id="email"
                       onChange={handleChange}
+                      required
+                      onInvalid={e => e.target.setCustomValidity('Please Enter Email')}
+                      onInput={e => e.target.setCustomValidity('')}
                     />
                   </div>
                 </div>
@@ -97,13 +100,6 @@ export default function SignIn() {
                     >
                       Password
                     </label>
-                    {/* <a
-                      href="#"
-                      title=""
-                      className="text-sm font-semibold text-black hover:underline"
-                    >
-                      Forgot password?
-                    </a> */}
                   </div>
                   <div className="mt-2">
                     <input
@@ -112,18 +108,14 @@ export default function SignIn() {
                       placeholder="Password"
                       id="password"
                       onChange={handleChange}
+                      required
+                      onInvalid={e => e.target.setCustomValidity('Please Enter Password')}
+                      onInput={e => e.target.setCustomValidity('')}
                     />
                   </div>
                 </div>
                 <div>
-                  {/* <button
-                    type="button"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                  >
-                    Get started
-                   
-                  </button> */}
-
+            
                   <button
                     disabled={loading}
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 disabled:opacity-80"
@@ -169,48 +161,6 @@ export default function SignIn() {
         </div>
       </div>
 
-      {/* <div className="p-5 max-w-lg mx-auto">
-        <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <input
-            type="email"
-            placeholder="Email"
-            className="border p-3 rounded-lg"
-            id="email"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Please Enter Email')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-
-          <input
-            type="password"
-            placeholder="Password"
-            className="border p-3 rounded-lg"
-            id="password"
-            onChange={handleChange}
-            required
-            onInvalid={e => e.target.setCustomValidity('Please Enter Password')}
-            onInput={e => e.target.setCustomValidity('')}
-          />
-
-          <button
-            disabled={loading}
-            className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
-          >
-            {loading ? "Loading..." : "Sign In"}
-          </button>
-        </form>
-
-        <div className="flex gap-2 mt-5">
-          <p>Don't Have an account?</p>
-          <Link to={"/sign-in"}>
-            <span className="text-blue-700">Sign Up</span>
-          </Link>
-        </div>
-        {error && <p className="text-red-500 mt-5">{error}</p>}
-      </div> */}
     </>
   );
 }
