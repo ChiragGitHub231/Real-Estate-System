@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
@@ -62,6 +62,9 @@ export default function SignUp() {
             className="border p-3 rounded-lg"
             id="username"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Username is Required')}
+            onInput={e => e.target.setCustomValidity('')}
           />
 
           <input
@@ -70,6 +73,9 @@ export default function SignUp() {
             className="border p-3 rounded-lg"
             id="contactno"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Contact No is Required')}
+            onInput={e => e.target.setCustomValidity('')}
           />
 
           <input
@@ -78,14 +84,20 @@ export default function SignUp() {
             className="border p-3 rounded-lg"
             id="email"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Email is Required')}
+            onInput={e => e.target.setCustomValidity('')}
           />
-
+  
           <input
             type="password"
             placeholder="Password"
             className="border p-3 rounded-lg"
             id="password"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Password is Required')}
+            onInput={e => e.target.setCustomValidity('')}
           />
 
           <button

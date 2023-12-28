@@ -62,6 +62,9 @@ export default function SignIn() {
             className="border p-3 rounded-lg"
             id="email"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Please Enter Email')}
+            onInput={e => e.target.setCustomValidity('')}
           />
 
           <input
@@ -70,6 +73,9 @@ export default function SignIn() {
             className="border p-3 rounded-lg"
             id="password"
             onChange={handleChange}
+            required
+            onInvalid={e => e.target.setCustomValidity('Please Enter Password')}
+            onInput={e => e.target.setCustomValidity('')}
           />
 
           <button

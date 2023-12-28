@@ -7,6 +7,10 @@ export const signup = async (req, res, next) => {
     // destructruring data from request
     const { username, contactno, email, password} = req.body;
 
+    const existUsername = await User.findOne({ username });
+    const existContactNo = await User.findOne({ contactno });
+    const existEmail = await User.findOne({ email });
+
     // hashing the password
     const hashedPassword = bcryptjs.hashSync(password, 10); 
 
