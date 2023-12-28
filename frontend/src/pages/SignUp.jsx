@@ -114,7 +114,7 @@ export default function SignUp() {
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <label
                     htmlFor="mobile"
                     className="text-base font-medium text-gray-900"
@@ -135,7 +135,7 @@ export default function SignUp() {
                       onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <div className="flex items-center justify-between">
