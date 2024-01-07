@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 // Fa stands for Font awesome. It takes icons from font awesome website.
 import { FaSearch } from "react-icons/fa";
 
+import { useSelector } from 'react-redux';
+
 export default function Header() {
+  const { currentUser } = useSelector(state => state.user)
+
   return (
     <header className="bg-slate-200 shadow-md">
       {/* Name & Search bar are next to each other using flex
@@ -51,10 +55,15 @@ export default function Header() {
               Privacy
             </li>
           </Link>
-          <Link to='/sign-up'>
-            <li className="text-slate-700 hover:no-underline cursor-pointer">
-              Sign Up
-            </li>
+
+          <Link to='/profile'>
+            {currentUser ? (
+              <img className="rounded-full h-7 w-7 object-cover" src={currentUser.avatar} alt="profile" />
+            ) : (
+              <li className="text-slate-700 hover:no-underline cursor-pointer">
+                Sign In
+              </li>
+            )}
           </Link>
         </ul>
       </div>
