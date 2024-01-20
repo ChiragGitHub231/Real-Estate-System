@@ -26,7 +26,7 @@ export default function CreateListing() {
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
 
-    console.log(formData);
+    console.log(formData.imageUrls);
 
     const handleImageSubmit = (e) => {
         if(files.length > 0 && files.length + formData.imageUrls.length < 7){
@@ -204,7 +204,8 @@ export default function CreateListing() {
                         value={formData.contactno}
                     />
 
-                    <div className='flex gap-6 flex-wrap'>
+                    <div className='flex gap-6 flex-wrap'> 
+                        <p>Select Type: </p>
                         <div className='flex gap-2'>
                             <input type='checkbox' id='sell' className='w-5' onChange={handleChange} 
                             checked={formData.type === 'sell'}/>
@@ -215,22 +216,24 @@ export default function CreateListing() {
                             checked={formData.type === 'rent'}/>
                             <span>Rent</span>
                         </div>
+                    </div>
+                    
                         <div className='flex gap-2'>
+                            <p>Does property have any parking spot? </p>
                             <input type='checkbox' id='parking' className='w-5' onChange={handleChange} 
                             checked={formData.parking}/>
-                            <span>Parking Spot</span>
                         </div>
                         <div className='flex gap-2'>
+                            <p>Does property involves furnished? </p>
                             <input type='checkbox' id='furnished' className='w-5' onChange={handleChange} 
                             checked={formData.furnished}/>
-                            <span>Furnished</span>
                         </div>
                         <div className='flex gap-2'>
+                            <p>Do you want to give an offer on property? </p>
                             <input type='checkbox' id='offer' className='w-5' onChange={handleChange} 
                             checked={formData.offer}/>
-                            <span>Offer</span>
+                            
                         </div>
-                    </div>
 
                     <div className='flex gap-6 flex-wrap'>
                         <div className='flex items-center gap-2'>
@@ -329,9 +332,9 @@ export default function CreateListing() {
 
                     <p className='text-red-700 text-sm'>{imageUploadError && imageUploadError}</p>
                     {
-                        formData.imageUrls.length > 0 && formData.imageUrls.map((url, index) => {
+                        formData.imageUrls.length > 0 && formData.imageUrls.map((url, index) => (
                             <div key={url} className='flex justify-between p-3 border items-center'>
-                                <img src={url} alt='listing image' className='w-20 h-20 object-contain rounded-lg' />
+                                <img src={url} key={url} alt='listing image' className='w-20 h-20 object-contain rounded-lg' />
                                
                                 <button
                                     type='button' 
@@ -341,7 +344,7 @@ export default function CreateListing() {
                                     Delete
                                 </button>
                             </div>
-                        })
+                        ))
                     }
 
                     <button

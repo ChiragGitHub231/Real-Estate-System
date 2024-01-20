@@ -14,13 +14,15 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser, error } = useSelector((state) => state.user);
   const fileRef = useRef(null);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingError, setShowListingError] = useState(false);
+  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -124,6 +126,23 @@ export default function Profile() {
     }
     catch(error){
       dispatch(signOutFailure(data.message));
+    }
+  }
+
+  const handleShowListings = async () => {
+    try{
+      setShowListingError(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if(data.success === false){
+        setShowListingError(true);
+        return;
+      }
+
+      setUserListings(data);
+    }
+    catch(error){
+      setShowListingError(true);
     }
   }
 
@@ -233,6 +252,26 @@ export default function Profile() {
         <p className="text-green-700 mt-5">
           {updateSuccess ? "User Updated Successfully!" : ""}
         </p>
+
+        <button onClick={handleShowListings} className="text-green-700 w-full">
+          Show Listings
+        </button>
+
+        <p className="text-red-700 mt-5">
+            {
+              showListingError ? 'Error Showing Listings' : ''
+            }
+        </p>
+
+        {
+          userListings && userListings.length > 0 && userListings.map((listing) => {
+            <div key={listing._id} className="">
+              <Link to={`/listings/${listing._id}`}>
+                <img src={listing.imageUrls[0]} alt="listing cover" />
+              </Link>
+            </div>
+          })
+        }
       </div>
     </>
   );
