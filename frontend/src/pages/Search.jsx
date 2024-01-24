@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ListingItem from '../components/ListingItem';
 
 export default function Search() {
     const [sidebardata, setSideBarData] = useState({
@@ -13,9 +14,9 @@ export default function Search() {
         order: 'desc',
     });
 
-    const [listing, setListing] = useState([]);
+    const [listings, setListings] = useState([]);
 
-    console.log(listing);
+    console.log(listings);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
@@ -44,7 +45,7 @@ export default function Search() {
             const searchQuery = urlParams.toString();
             const res = await fetch(`/api/listing/get?${searchQuery}`);
             const data = await res.json();
-            setListing(data);
+            setListings(data);
         }
 
         fetchListings();
@@ -175,6 +176,18 @@ export default function Search() {
             {/* Right Side of Page */}
             <div className=''>
                 <h1 className='text-2xl font-semibold border-b p-3 text-slate-700 mt-1'>Listing Results: </h1>
+
+                <div className='p-7 flex flex-wrap gap-2'>
+                    {listings.length === 0 && (
+                        <p className='text-xl text-slate-700'>No Listing Found!</p>
+                    )}
+
+                    {
+                        listings && listings.map((listing) => (
+                            <ListingItem key={listing._id} listing={listing} />
+                        ))
+                    }
+                </div>
             </div>
 
         </div>

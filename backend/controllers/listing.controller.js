@@ -77,22 +77,22 @@ export const getListing = async (req, res, next) => {
 
 export const getListings = async (req, res, next) => {
     try{
-        const limit = parseInt(req.query.limit) || 9;
+        const limit = parseInt(req.query.limit) || 6;
         const startIndex = parseInt(req.query.startIndex) || 0;
 
         let offer = req.query.offer;
         if(offer === undefined || offer === 'false'){
-            offer = { $in: [false, undefined] };
+            offer = { $in: [false, true] };
         }
 
         let furnished = req.query.furnished;
         if(furnished === undefined || furnished === 'false'){
-            furnished = { $in: [false, undefined] };
+            furnished = { $in: [false, true] };
         }
 
         let parking = req.query.parking;
         if(parking === undefined || parking === 'false'){
-            parking = { $in: [false, undefined] };
+            parking = { $in: [false, true] };
         }
 
         let type = req.query.type;
