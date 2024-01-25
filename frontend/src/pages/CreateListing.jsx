@@ -23,6 +23,7 @@ export default function CreateListing() {
     });
     const [imageUploadError, setImageUploadError] = useState(false);
     const [error, setError] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const { currentUser } = useSelector(state => state.user);
     const navigate = useNavigate();
 
@@ -32,6 +33,8 @@ export default function CreateListing() {
         if(files.length > 0 && files.length + formData.imageUrls.length < 7){
             const promises = [];
 
+            setUploading(true);
+
             for(let i=0; i<files.length; i++){
                 promises.push(storeImage(files[i]));
             }
@@ -39,12 +42,15 @@ export default function CreateListing() {
             Promise.all(promises).then((urls) => {
                 setFormData({ ...formData, imageUrls: formData.imageUrls.concat(urls) });
                 setImageUploadError(false);
+                setUploading(false);
             }).catch((err) => {
                 setImageUploadError('Image Upload Failed (5 mb max per image)');
+                setUploading(false);
             });
         }
         else{
             setImageUploadError('You can only upload 6 images per listing');
+            setUploading(false);
         }
     }
 
@@ -267,7 +273,7 @@ export default function CreateListing() {
                                 type='number' 
                                 id='regularPrice' 
                                 min='500' 
-                                max='100000' 
+                                max='100000000' 
                                 required
                                 className='p-2 border border-gray-300 rounded-lg'
                                 onChange={handleChange}
@@ -287,7 +293,7 @@ export default function CreateListing() {
                                     type='number' 
                                     id='discountPrice' 
                                     min='0' 
-                                    max='30000' 
+                                    max='100000' 
                                     required
                                     className='p-2 border border-gray-300 rounded-lg'
                                     onChange={handleChange}
@@ -326,7 +332,7 @@ export default function CreateListing() {
                             className='p-2 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
                             onClick={handleImageSubmit}
                         >
-                                Upload
+                            {uploading ? 'Uploading...' : 'Upload'}
                         </button>
                     </div>
 
