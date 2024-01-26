@@ -2,6 +2,7 @@ import bcryptjs from 'bcryptjs'
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
 import Listing from '../models/listing.model.js';
+import ContactUsModel from '../models/contactus.model.js';
 
 export const test = (req, res) => {
     res.send('API Route Is Work');
@@ -78,6 +79,22 @@ export const getUser = async (req, res, next) => {
 
         const { password: pass, ...rest } = user._doc;
         res.status(200).json(rest);
+    }
+    catch(error){
+        next(error);
+    }
+}
+
+
+export const saveContactUsDetails = async (req, res, next) => {
+    // destructruring data from request
+    const { email, title, description } = req.body;
+
+    const newContactUsData = new ContactUsModel({ email: email, title: title, description: description });
+
+    try{
+        await newContactUsData.save();
+        res.status(201).json('Contact Us Details Submitted Successfully!');
     }
     catch(error){
         next(error);
