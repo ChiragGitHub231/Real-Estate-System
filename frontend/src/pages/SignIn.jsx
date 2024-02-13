@@ -10,7 +10,7 @@ import OAuth from "../components/OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -47,7 +47,11 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      if(formData.email == 'admin777@gmail.com' && formData.password == 'admin777'){
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       dispatch(signInFailure(error.message));
     }

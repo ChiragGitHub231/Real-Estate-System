@@ -154,24 +154,25 @@ export default function Profile() {
   };
 
   const handleListingDelete = async (listingId) => {
-    try{
+    try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await res.json();
 
-      if(data.success === false){
+      if (data.success === false) {
         console.log(data.message);
         return;
       }
 
       // Get all listing except one which has listingId
-      setUserListings((prev) => prev.filter((listing) => listing._id !== listingId));
-    } 
-    catch(error){
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   return (
     <>
@@ -235,33 +236,55 @@ export default function Profile() {
             onChange={handleChange}
           />
 
-          <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            className="border p-3 rounded-lg"
-            onChange={handleChange}
-          />
+          {currentUser && currentUser.email !== "admin777@gmail.com" && (
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              className="border p-3 rounded-lg"
+              onChange={handleChange}
+            />
+          )}
 
-          <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
-            Update
-          </button>
+          {currentUser && currentUser.email === "admin777gmail.com" && (
+            <button className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80">
+              Update
+            </button>
+          )}
 
-          <Link
-            className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
-            to={"/create-listing"}
-          >
-            Create Listing
-          </Link>
+          {currentUser && currentUser.email !== "admin777@gmail.com" && (
+            <Link
+              className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
+              to={"/create-listing"}
+            >
+              Create Listing
+            </Link>
+          )}
         </form>
 
         <div className="flex justify-between mt-5">
-          <span
-            className="text-red-700 cursor-pointer"
-            onClick={handleDeleteUser}
-          >
-            Delete Account
-          </span>
+          {currentUser && currentUser.email !== "admin777@gmail.com" && (
+            <span
+              className="text-red-700 cursor-pointer"
+              onClick={handleDeleteUser}
+            >
+              Delete Account
+            </span>
+          )}
+
+          {currentUser && currentUser.email === "admin777@gmail.com" ? (
+            <>
+              <Link to={"/admin"}>
+                <span className="text-red-700 cursor-pointer">Go Back</span>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to={"/"}>
+                <span className="text-red-700 cursor-pointer">Go Back</span>
+              </Link>
+            </>
+          )}
 
           <span className="text-red-700 cursor-pointer" onClick={handleSignOut}>
             Sign Out
@@ -273,9 +296,14 @@ export default function Profile() {
           {updateSuccess ? "User Updated Successfully!" : ""}
         </p>
 
-        <button onClick={handleShowListings} className="text-green-700 w-full">
-          Show Listings
-        </button>
+        {currentUser && currentUser.email !== "admin777@gmail.com" && (
+          <button
+            onClick={handleShowListings}
+            className="text-green-700 w-full"
+          >
+            Show Listings
+          </button>
+        )}
 
         <p className="text-red-700 mt-5">
           {showListingError ? "Error Showing Listings" : ""}
@@ -283,7 +311,9 @@ export default function Profile() {
 
         {userListings && userListings.length > 0 && (
           <div className="flex flex-col gap-4">
-            <h1 className="text-center mt-7 text-2xl font-semibold">Your Listings</h1>
+            <h1 className="text-center mt-7 text-2xl font-semibold">
+              Your Listings
+            </h1>
             {userListings.map((listing) => (
               <div
                 key={listing._id}
@@ -304,7 +334,7 @@ export default function Profile() {
                 </Link>
 
                 <div className="flex flex-col items-center">
-                  <button 
+                  <button
                     className="text-red-700 uppercase"
                     onClick={() => handleListingDelete(listing._id)}
                   >

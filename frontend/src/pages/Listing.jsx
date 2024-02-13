@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
@@ -9,7 +9,6 @@ import {
   FaBath,
   FaBed,
   FaChair,
-  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaPhone,
@@ -25,7 +24,10 @@ export default function Listing() {
   const params = useParams();
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
+  const [report, setReport] = useState(false);
+  const [reportData, setReportData] = useState({});
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -47,6 +49,40 @@ export default function Listing() {
 
     fetchListing();
   }, [params.listingId]);
+
+  const handleChange = (e) => {
+    setReportData({
+      ...reportData,
+      [e.target.id]: e.target.value,
+      listingownerid: listing.userRef,
+      listingid: listing._id
+    }); 
+  };
+  console.log(reportData);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("/api/report/send-report", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reportData),
+      });
+
+      // Convert response to JSON
+      const data = await res.json();
+
+      if (data.success === false) {
+        return;
+      }
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -179,6 +215,41 @@ export default function Listing() {
                 )}
 
                 {contact && <Contact listing={listing} />}
+
+                {currentUser && listing.userRef !== currentUser._id && !report && (
+                  <button 
+                    type="button" 
+                    className="bg-slate-700 text-white rounded-lg p-2 mt-4 hover:opacity-95"
+                    onClick={() => setReport(true)}
+                  >
+                    Report
+                  </button>
+                )}
+
+                {report && (
+                  <form method="POST" onSubmit={handleSubmit}>
+                    <textarea
+                      placeholder="Description..."
+                      id="description"
+                      className="flex w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                      rows={4}
+                      cols={80}
+                      onChange={handleChange}
+                      required
+                      onInvalid={(e) => e.target.setCustomValidity("Please Enter Description")}
+                      onInput={(e) => e.target.setCustomValidity("")}
+                    />
+
+                    <button 
+                      type="button" 
+                      className="bg-slate-700 text-white rounded-lg p-2 mt-4 hover:opacity-95 w-full"
+                      onClick={handleSubmit}
+                    >
+                      Send Report
+                    </button>
+                  </form>
+                )}
+                
               </div>
 
               <div className="flex flex-col flex-1 gap-6">
