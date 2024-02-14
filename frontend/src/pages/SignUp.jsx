@@ -53,7 +53,7 @@ export default function SignUp() {
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-auto">
-        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-6">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl">
               Sign up
@@ -115,29 +115,6 @@ export default function SignUp() {
                   </div>
                 </div>
 
-                {/* <div>
-                  <label
-                    htmlFor="mobile"
-                    className="text-base font-medium text-gray-900"
-                  >
-                    Contact no
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="text"
-                      placeholder="Mobile"
-                      id="contactno"
-                      onChange={handleChange}
-                      required
-                      onInvalid={(e) =>
-                        e.target.setCustomValidity("Contact No is Required")
-                      }
-                      onInput={(e) => e.target.setCustomValidity("")}
-                    />
-                  </div>
-                </div> */}
-
                 <div>
                   <div className="flex items-center justify-between">
                     <label
@@ -176,12 +153,21 @@ export default function SignUp() {
             </form>
 
             <OAuth />
+
+            { error && (
+              <>
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
+                  <strong className="font-bold">Error!</strong>
+                  <span className="block sm:inline"> Something went wrong!</span>
+                </div>
+              </>
+            )}
             
           </div>
         </div>
         <div className="h-full w-full">
           <img
-            className="mx-auto h-4/5 w-4/5 mt-10 pt-10  rounded-md object-cover"
+            className="mx-auto h-4/5 w-4/5 mt-10 pt-10 rounded-md object-cover"
             src="https://images.unsplash.com/photo-1630673245362-f69d2b93880e?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80"
             alt=""
           />
