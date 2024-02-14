@@ -52,7 +52,7 @@ export default function Home() {
     }
 
     fetchOfferListings();
-  }, [])
+  }, [])  
 
   const allListings = [ ...sellListings, ...offerListings, ...rentListings ];
 

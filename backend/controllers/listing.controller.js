@@ -102,6 +102,8 @@ export const getListings = async (req, res, next) => {
 
         const searchTerm = req.query.searchTerm || '';
 
+        const address = req.query.address || '';
+
         const sort = req.query.sort || 'createdAt';
 
         const order = req.query.order || 'desc';
@@ -112,6 +114,7 @@ export const getListings = async (req, res, next) => {
             furnished,
             parking,
             type,
+            address: { $regex: address, $options: 'i' },
         }).sort(
             { [sort]: order }
         ).limit(limit).skip(startIndex);

@@ -7,6 +7,7 @@ export default function Search() {
     const [sidebardata, setSideBarData] = useState({
         searchTerm: '',
         type: 'all',
+        address: '',
         parking: false,
         furnished: false,
         offer: false,
@@ -22,16 +23,18 @@ export default function Search() {
 
         const searchTermFromUrl = urlParams.get('searchTerm');
         const typeFromUrl = urlParams.get('type');
+        const addressFromUrl = urlParams.get('address');
         const parkingFromUrl = urlParams.get('parking');
         const furnishedFromUrl = urlParams.get('furnished');
         const offerFromUrl = urlParams.get('offer');
         const sortFromUrl = urlParams.get('sort');
         const orderFromUrl = urlParams.get('order');
 
-        if(searchTermFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl){
+        if(searchTermFromUrl || addressFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl){
             setSideBarData({
                 searchTerm: searchTermFromUrl || '',
                 type: typeFromUrl || 'all',
+                address: addressFromUrl || '',
                 parking: parkingFromUrl === 'true' ? true : false,
                 furnished: furnishedFromUrl === 'true' ? true : false,
                 offer: offerFromUrl === 'true' ? true : false,
@@ -70,6 +73,10 @@ export default function Search() {
             setSideBarData({ ...sidebardata, searchTerm: e.target.value });
         }
 
+        if(e.target.id === 'address'){
+            setSideBarData({ ...sidebardata, address: e.target.value });
+        }
+
         if(e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer'){
             setSideBarData({ ...sidebardata, [e.target.id]: e.target.checked || e.target.checked === 'true' ? true : false });
         }
@@ -89,6 +96,7 @@ export default function Search() {
 
         urlParams.set('searchTerm', sidebardata.searchTerm);
         urlParams.set('type', sidebardata.type);
+        urlParams.set('address', sidebardata.address);
         urlParams.set('parking', sidebardata.parking);
         urlParams.set('furnished', sidebardata.furnished);
         urlParams.set('offer', sidebardata.offer);
@@ -188,6 +196,14 @@ export default function Search() {
                             <option value='createdAt_desc'>Latest</option>
                             <option value='createdAt_asc'>Oldest</option>
                         </select>
+                    </div>
+
+                    <div className='flex items-center gap-3'>
+                        <label className='whitespace-nowrap font-semibold'>Address: </label>
+                        <input type='text' id='address' placeholder='Enter Address' 
+                            className='border rounded-lg p-2 w-full' 
+                            value={sidebardata.address}
+                            onChange={handleChange}/>
                     </div>
 
                     <button className='bg-slate-700 text-white rounded-lg p-2 hover:opacity-95'>
