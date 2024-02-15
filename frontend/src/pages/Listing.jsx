@@ -253,7 +253,7 @@ export default function Listing() {
               </div>
 
               <div className="flex flex-col flex-1 gap-6">
-                <Map />
+                <Map city={listing.address} />
               </div>
             </div>
           </>
