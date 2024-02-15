@@ -24,7 +24,6 @@ export default function Map({ city }) {
         });
     }
   }, [city]);
-  console.log(coordinates);
 
   return (
     <>

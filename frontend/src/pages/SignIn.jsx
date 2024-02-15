@@ -36,6 +36,7 @@ export default function SignIn() {
     try {
       dispatch(signInStart());
 
+
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -52,7 +53,10 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      if(formData.email == 'admin777@gmail.com' && formData.password == 'admin777'){
+      if (
+        formData.email == "admin777@gmail.com" &&
+        formData.password == "admin777"
+      ) {
         navigate("/admin");
       } else {
         navigate("/");
@@ -97,8 +101,10 @@ export default function SignIn() {
                       id="email"
                       onChange={handleChange}
                       required
-                      onInvalid={e => e.target.setCustomValidity('Please Enter Email')}
-                      onInput={e => e.target.setCustomValidity('')}
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Please Enter Email")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
                 </div>
@@ -119,13 +125,14 @@ export default function SignIn() {
                       id="password"
                       onChange={handleChange}
                       required
-                      onInvalid={e => e.target.setCustomValidity('Please Enter Password')}
-                      onInput={e => e.target.setCustomValidity('')}
+                      onInvalid={(e) =>
+                        e.target.setCustomValidity("Please Enter Password")
+                      }
+                      onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
                 </div>
                 <div>
-            
                   <button
                     // disabled={loading}
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 disabled:opacity-80"
@@ -136,23 +143,28 @@ export default function SignIn() {
                 </div>
               </div>
             </form>
-            
+
             <OAuth />
 
             <Link to={"/"}>
               <span className="text-blue-700">Go to Home</span>
             </Link>
-            { error && (
+            {error && (
               <>
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3"
+                  role="alert"
+                >
                   <strong className="font-bold">Error!</strong>
-                  <span className="block sm:inline"> Invalid Username or Password</span>
+                  <span className="block sm:inline">
+                    {" "}
+                    Invalid Username or Password
+                  </span>
                 </div>
               </>
             )}
           </div>
         </div>
-        
 
         <div className="h-full w-full">
           <img
@@ -161,7 +173,6 @@ export default function SignIn() {
             alt=""
           />
         </div>
-
       </div>
     </>
   );

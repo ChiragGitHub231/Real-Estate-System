@@ -4,6 +4,8 @@ import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState({});
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -15,13 +17,25 @@ export default function SignUp() {
       [e.target.id]: e.target.value,
     });
   };
-  console.log(formData);
+  console.log(formData.password);
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword({
+      ...confirmPassword,
+      [e.target.id]: e.target.value,
+    });
+  };
+  console.log(confirmPassword.confirmpassword);
 
   // This function submits the form
   const handleSubmit = async (e) => {
     // Prevent the refreshing when we submit the form
     e.preventDefault();
 
+    if(formData.password !== confirmPassword.confirmpassword){
+      setIsPasswordMatch(true);
+      return;
+    }
     try {
       setLoading(true);
 
@@ -43,6 +57,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
+      setIsPasswordMatch(true);
       navigate("/sign-in");
     } catch (error) {
       setLoading(false);
@@ -139,7 +154,43 @@ export default function SignUp() {
                       onInput={(e) => e.target.setCustomValidity("")}
                     />
                   </div>
+
+                  <div className="mt-4">
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor="password"
+                        className="text-base font-medium text-gray-900"
+                      >
+                        Confirm Password
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                        type="text"
+                        id="confirmpassword"
+                        placeholder="Confirm Password"
+                        name="confirmPassword"
+                        onChange={handleConfirmPasswordChange}
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
+
+                {isPasswordMatch && (
+              <>
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3"
+                  role="alert"
+                >
+                  <span className="block sm:inline">
+                    {" "}
+                    Password and Confirm Password not matched
+                  </span>
+                </div>
+              </>
+            )}
 
                 <div>
                   <button
@@ -154,15 +205,20 @@ export default function SignUp() {
 
             <OAuth />
 
-            { error && (
+            {error && (
               <>
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3" role="alert">
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-3"
+                  role="alert"
+                >
                   <strong className="font-bold">Error!</strong>
-                  <span className="block sm:inline"> Something went wrong!</span>
+                  <span className="block sm:inline">
+                    {" "}
+                    Something went wrong!
+                  </span>
                 </div>
               </>
             )}
-            
           </div>
         </div>
         <div className="h-full w-full">
