@@ -17,7 +17,6 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signOutStart,
-  signInFailure,
   signOutFailure,
   signOutSuccess,
 } from "../redux/user/userSlice.js";
@@ -173,6 +172,7 @@ export default function Profile() {
       console.log(error.message);
     }
   };
+  const admin_username = import.meta.env.ADMIN_USER_NAME;
 
   return (
     <>
@@ -271,7 +271,7 @@ export default function Profile() {
             </span>
           )}
 
-          {currentUser && currentUser.email === "admin777@gmail.com" ? (
+          {currentUser && currentUser.email === import.meta.env.ADMIN_USER_NAME ? (
             <>
               <Link to={"/admin"}>
                 <span className="text-red-700 cursor-pointer">Go Back</span>

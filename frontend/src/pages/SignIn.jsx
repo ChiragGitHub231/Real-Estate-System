@@ -54,8 +54,8 @@ export default function SignIn() {
       }
       dispatch(signInSuccess(data));
       if (
-        formData.email == "admin777@gmail.com" &&
-        formData.password == "admin777"
+        formData.email == import.meta.env.ADMIN_USER_NAME &&
+        formData.password == import.meta.env.ADMIN_USER_PASSWORD
       ) {
         navigate("/admin");
       } else {

@@ -90,7 +90,7 @@ export default function SignUp() {
                     htmlFor="name"
                     className="text-base font-medium text-gray-900"
                   >
-                    username
+                    Username
                   </label>
                   <div className="mt-2">
                     <input

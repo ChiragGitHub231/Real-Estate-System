@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"
 
 // Fa stands for Font awesome. It takes icons from font awesome website.
 import { FaSearch } from "react-icons/fa";
@@ -49,7 +49,7 @@ export default function Header() {
           onSubmit={handleSubmit}
           className="bg-slate-100 p-2 rounded-lg flex items-center ml-32"
         >
-          {currentUser && currentUser.email === "admin777@gmail.com" ? (
+          {currentUser && currentUser.email === import.meta.env.ADMIN_USER_NAME ? (
             <></>
           ) : (
             <>
@@ -69,7 +69,7 @@ export default function Header() {
 
         {/* navbar options */}
         <ul className="flex gap-4 p-2">
-          {currentUser && currentUser.email === "admin777@gmail.com" ? (
+          {currentUser && currentUser.email === import.meta.env.ADMIN_USER_NAME ? (
             <>
               <Link to="/admin">
                 <li className="hidden sm:inline text-slate-700 hover:no-underline cursor-pointer">
@@ -116,7 +116,7 @@ export default function Header() {
               </Link>
             </>
           )}
-
+          
           <Link to="/profile">
             {currentUser ? (
               <img

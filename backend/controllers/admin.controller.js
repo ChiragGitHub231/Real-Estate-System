@@ -5,7 +5,7 @@ import { errorHandler } from "../utils/error.js";
 
 export const getUsers = async (req, res, next) => {
     try{
-        const users = await User.find({ email: { $ne: 'admin777@gmail.com' } });
+        const users = await User.find({ email: { $ne: process.env.ADMIN_USER_NAME } });
 
         return res.status(200).json(users);
     }
