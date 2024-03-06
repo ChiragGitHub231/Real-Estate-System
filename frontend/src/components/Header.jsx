@@ -69,7 +69,7 @@ export default function Header() {
 
         {/* navbar options */}
         <ul className="flex gap-4 p-2">
-          {currentUser && currentUser.email === import.meta.env.ADMIN_USER_NAME ? (
+          {currentUser && currentUser.email === 'admin777@gmail.com' ? (
             <>
               <Link to="/admin">
                 <li className="hidden sm:inline text-slate-700 hover:no-underline cursor-pointer">
