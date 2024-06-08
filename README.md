@@ -1,5 +1,9 @@
 # Property Pulse - An Online Real Estate System
 
+## Screenshot
+
+
+
 ## Description
 
 Property Pulse is an online real estate system. It is an online platform through which user can view, buy or sell the property. 
