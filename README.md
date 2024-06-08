@@ -117,4 +117,4 @@ Admin can manage the system data such as property details, user details, handlin
 
 ### Database: MongoDB, Firebase
 
-### Tools: Visual Studio, Insomnia 
+### Tools: Visual Studio Code, Insomnia 
