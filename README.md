@@ -2,7 +2,9 @@
 
 ## Screenshot
 
+### Home Page
 
+![img-1](https://github.com/ChiragGitHub231/Real-Estate-System/assets/107389544/14a95187-668d-4131-a171-49b2527729ab)
 
 ## Description
 
