@@ -73,6 +73,7 @@
 Property Pulse is an online real estate system. It is an online platform through which user can view, buy or sell the property. 
 There are two types of Users: User and Admin. User can view and add details of property which is he/she wants to sell and he/she can also buy the property after logged in to the system. 
 Admin can manage the system data such as property details, user details, handling user queries. User can also report to the property if it gets any issues which is handled by Admin.
+We built this system with React and Tailwind CSS for frontend developement and Node, Express for backend development and used MongoDB and Firebase for database.
 
 ## Types of Users
 
