@@ -42,6 +42,10 @@
 
 ![img-11](https://github.com/ChiragGitHub231/Real-Estate-System/assets/107389544/b3ca9cef-e475-4491-822e-52bd60ffd85a)
 
+### Admin Panel Home Page
+
+![img-12](https://github.com/ChiragGitHub231/Real-Estate-System/assets/107389544/50e691e1-bcbe-4934-9311-133ac1c9672b)
+
 ## Description
 
 Property Pulse is an online real estate system. It is an online platform through which user can view, buy or sell the property. 
